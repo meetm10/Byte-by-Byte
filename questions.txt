@@ -1,0 +1,13 @@
+1. Explain the process of creating a doubly linked list.
+2. Write the pivot logic in quick sort.
+3. Implement stack using linked list
+4. Define a binary heap
+5. Explain Djikstra's algorithm for minimum spanning tree
+6. Implement single source shortest path for a graph
+7. Breadth first search vs Depth first search
+8. Write a program to merge k sorted lists
+9. Implement double ended queue
+10. Explain the concept of hashing
+11. Write skeleton for Hashmap class
+12. Write a program to merge k sorted arrays
+13. Explain count sort

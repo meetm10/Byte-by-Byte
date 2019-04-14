@@ -1,0 +1,166 @@
+[W 02:36:47.994 NotebookApp] WARNING: The notebook server is listening on all IP addresses and not using encryption. This is not recommended.
+[I 02:36:48.001 NotebookApp] Serving notebooks from local directory: /home/meetmukadam
+[I 02:36:48.001 NotebookApp] 0 active kernels
+[I 02:36:48.001 NotebookApp] The Jupyter Notebook is running at:
+[I 02:36:48.001 NotebookApp] http://[all ip addresses on your system]:5000/?token=e45692147cee61274e3677837220af3c71cdd5143a58b39f
+[I 02:36:48.001 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 02:36:48.001 NotebookApp] 
+    
+    Copy/paste this URL into your browser when you connect for the first time,
+    to login with a token:
+        http://localhost:5000/?token=e45692147cee61274e3677837220af3c71cdd5143a58b39f
+[I 02:37:05.941 NotebookApp] 302 GET /?token=e45692147cee61274e3677837220af3c71cdd5143a58b39f (65.113.61.98) 0.72ms
+[I 02:45:02.363 NotebookApp] Saving file at /server.py
+[I 02:45:45.130 NotebookApp] Saving file at /server.py
+[I 02:45:45.534 NotebookApp] Saving file at /server.py
+[I 02:45:46.022 NotebookApp] Saving file at /server.py
+[I 02:45:46.418 NotebookApp] Saving file at /server.py
+[I 02:45:46.714 NotebookApp] Saving file at /server.py
+[I 02:45:47.642 NotebookApp] Saving file at /server.py
+[I 02:45:48.054 NotebookApp] Saving file at /server.py
+[I 02:45:48.471 NotebookApp] Saving file at /server.py
+[I 02:45:48.857 NotebookApp] Saving file at /server.py
+[I 02:45:55.735 NotebookApp] Saving file at /server.py
+[I 02:48:06.258 NotebookApp] Kernel started: 222cce67-8eb4-4230-840e-d2642285276c
+[I 02:48:07.010 NotebookApp] Adapting to protocol v5.1 for kernel 222cce67-8eb4-4230-840e-d2642285276c
+[I 02:50:06.741 NotebookApp] Saving file at /bitcamp.ipynb
+[I 03:08:04.292 NotebookApp] Saving file at /server.py
+[I 03:08:05.165 NotebookApp] Saving file at /server.py
+[I 03:08:05.310 NotebookApp] Saving file at /server.py
+[I 03:08:05.452 NotebookApp] Saving file at /server.py
+[I 03:13:21.420 NotebookApp] Saving file at /server.py
+[I 03:19:44.052 NotebookApp] Saving file at /server.py
+[I 03:22:19.074 NotebookApp] Saving file at /server.py
+[I 03:24:56.125 NotebookApp] Saving file at /server.py
+[I 03:26:32.887 NotebookApp] Saving file at /server.py
+[I 03:28:00.296 NotebookApp] Saving file at /server.py
+[I 03:28:17.495 NotebookApp] Saving file at /server.py
+[I 03:28:40.113 NotebookApp] Saving file at /server.py
+[I 03:28:52.181 NotebookApp] Saving file at /server.py
+[I 03:29:20.677 NotebookApp] Saving file at /server.py
+[I 03:30:32.354 NotebookApp] Saving file at /server.py
+[I 03:31:01.100 NotebookApp] Saving file at /server.py
+[I 03:32:19.687 NotebookApp] Saving file at /server.py
+[I 03:32:55.739 NotebookApp] Saving file at /server.py
+[I 03:34:02.910 NotebookApp] Saving file at /server.py
+[I 03:34:09.188 NotebookApp] Saving file at /server.py
+[I 03:35:22.141 NotebookApp] Saving file at /server.py
+[I 03:36:00.695 NotebookApp] Saving file at /server.py
+[I 03:38:27.035 NotebookApp] Saving file at /server.py
+[I 03:39:01.665 NotebookApp] Saving file at /server.py
+[I 03:42:37.342 NotebookApp] Starting buffering for 222cce67-8eb4-4230-840e-d2642285276c:67AC389124374E959D0F6A688EC02665
+[I 03:42:43.833 NotebookApp] Creating new directory in 
+[I 03:43:10.037 NotebookApp] Saving file at /server.py
+[I 03:43:11.089 NotebookApp] Saving file at /server.py
+[I 03:43:11.877 NotebookApp] Saving file at /server.py
+[I 03:43:13.247 NotebookApp] Saving file at /server.py
+[I 03:48:36.257 NotebookApp] Saving file at /server.py
+[I 03:50:07.417 NotebookApp] Saving file at /server.py
+[I 03:50:12.582 NotebookApp] Saving file at /server.py
+[I 03:52:15.848 NotebookApp] Saving file at /server.py
+[I 03:54:02.396 NotebookApp] Saving file at /server.py
+[I 03:54:11.600 NotebookApp] Saving file at /server.py
+[I 03:54:12.177 NotebookApp] Saving file at /server.py
+[I 03:54:12.843 NotebookApp] Saving file at /server.py
+[I 03:54:12.930 NotebookApp] Saving file at /server.py
+[I 03:54:13.226 NotebookApp] Saving file at /server.py
+[I 04:21:38.522 NotebookApp] Saving file at /server.py
+[I 04:26:37.767 NotebookApp] Saving file at /server.py
+[I 04:27:52.479 NotebookApp] Saving file at /server.py
+[I 04:27:53.286 NotebookApp] Saving file at /server.py
+[I 04:27:53.940 NotebookApp] Saving file at /server.py
+[I 04:28:00.738 NotebookApp] Saving file at /server.py
+[I 04:33:19.927 NotebookApp] Saving file at /server.py
+[I 04:34:24.071 NotebookApp] Saving file at /server.py
+[I 04:34:24.880 NotebookApp] Saving file at /server.py
+[I 04:34:37.394 NotebookApp] Saving file at /server.py
+[I 04:38:03.154 NotebookApp] Saving file at /server.py
+[I 04:39:43.639 NotebookApp] Saving file at /server.py
+[I 04:40:00.638 NotebookApp] Saving file at /server.py
+[I 04:40:58.471 NotebookApp] Saving file at /server.py
+[I 04:42:16.064 NotebookApp] Saving file at /server.py
+[W 04:43:18.977 NotebookApp] delete /uploads/tests.txt
+[W 04:54:41.150 NotebookApp] delete /uploads/Carlos Romero- grade report.txt
+[W 04:54:41.155 NotebookApp] delete /uploads/tests.txt
+[I 04:58:47.051 NotebookApp] 302 GET /?token=e45692147cee61274e3677837220af3c71cdd5143a58b39f (65.113.61.98) 0.58ms
+[W 05:00:31.817 NotebookApp] delete /uploads/Carlos Romero- grade report.txt
+[I 05:00:41.779 NotebookApp] 302 GET /?token=e45692147cee61274e3677837220af3c71cdd5143a58b39f (65.113.61.98) 0.89ms
+[I 05:01:00.828 NotebookApp] Uploading file to /helper.py
+[I 05:01:08.536 NotebookApp] Uploading file to /Final.pkl
+[I 05:02:25.127 NotebookApp] Saving file at /helper.py
+[I 05:03:37.918 NotebookApp] Saving file at /server.py
+[I 05:03:46.100 NotebookApp] Saving file at /server.py
+[I 05:04:10.864 NotebookApp] Saving file at /server.py
+[I 05:05:44.651 NotebookApp] Saving file at /server.py
+[I 05:06:28.678 NotebookApp] Saving file at /server.py
+[I 05:06:29.005 NotebookApp] Saving file at /server.py
+[I 05:06:29.244 NotebookApp] Saving file at /server.py
+[I 05:06:39.477 NotebookApp] Saving file at /server.py
+[I 05:06:51.085 NotebookApp] Saving file at /server.py
+[I 06:07:02.317 NotebookApp] 302 GET /?token=e45692147cee61274e3677837220af3c71cdd5143a58b39f (65.113.61.98) 0.65ms
+[I 06:07:56.564 NotebookApp] Uploading file to /model.py
+[I 06:08:45.033 NotebookApp] Uploading file to /BitcampModel.ipynb
+[W 06:08:45.035 NotebookApp] Notebook BitcampModel.ipynb is not trusted
+[I 06:10:57.999 NotebookApp] 302 GET /?token=e45692147cee61274e3677837220af3c71cdd5143a58b39f (65.113.61.98) 0.51ms
+[I 06:11:58.021 NotebookApp] Creating new notebook in 
+[I 06:11:58.813 NotebookApp] Kernel started: 0a0658e5-3229-41d4-9e18-f29ea9a0ed69
+[I 06:11:59.397 NotebookApp] Adapting to protocol v5.1 for kernel 0a0658e5-3229-41d4-9e18-f29ea9a0ed69
+[I 06:13:59.263 NotebookApp] Saving file at /Untitled.ipynb
+[I 06:15:59.761 NotebookApp] Saving file at /Untitled.ipynb
+[I 06:25:58.896 NotebookApp] Saving file at /Untitled.ipynb
+[I 06:27:59.222 NotebookApp] Saving file at /Untitled.ipynb
+[I 06:37:58.895 NotebookApp] Saving file at /Untitled.ipynb
+[I 06:38:18.948 NotebookApp] Creating new notebook in 
+[I 06:38:20.068 NotebookApp] Kernel started: 1a7de7f9-6536-4d26-9c91-dec6d1667930
+[I 06:38:20.597 NotebookApp] Adapting to protocol v5.1 for kernel 1a7de7f9-6536-4d26-9c91-dec6d1667930
+[I 06:39:11.897 NotebookApp] Starting buffering for 0a0658e5-3229-41d4-9e18-f29ea9a0ed69:16FD1BBC501349158A33816C61E15A6F
+[I 06:40:20.348 NotebookApp] Saving file at /helper.ipynb
+[I 06:42:20.451 NotebookApp] Saving file at /helper.ipynb
+[I 06:45:48.040 NotebookApp] Saving file at /server.py
+[I 06:46:20.226 NotebookApp] Saving file at /helper.ipynb
+[W 06:46:27.184 NotebookApp] delete /uploads/tests.txt
+[I 06:48:20.115 NotebookApp] Saving file at /helper.ipynb
+[I 06:50:20.220 NotebookApp] Saving file at /helper.ipynb
+[I 06:52:14.115 NotebookApp] Saving file at /uploads/questions.txt
+[I 06:52:20.337 NotebookApp] Saving file at /helper.ipynb
+[I 07:00:20.334 NotebookApp] Saving file at /helper.ipynb
+[I 07:02:20.099 NotebookApp] Saving file at /helper.ipynb
+[I 07:06:20.202 NotebookApp] Saving file at /helper.ipynb
+[I 07:08:20.099 NotebookApp] Saving file at /helper.ipynb
+[I 07:13:05.624 NotebookApp] Saving file at /uploads/questions.txt
+[I 07:14:20.213 NotebookApp] Saving file at /helper.ipynb
+[I 07:15:17.643 NotebookApp] Creating new directory in 
+[I 07:15:34.627 NotebookApp] Creating new file in 
+[I 07:17:33.558 NotebookApp] Saving file at /server.py
+[I 07:20:53.497 NotebookApp] Saving file at /server.py
+[I 07:21:14.327 NotebookApp] Saving file at /server.py
+[I 07:21:14.991 NotebookApp] Saving file at /server.py
+[I 07:23:47.295 NotebookApp] 302 GET /?token=e45692147cee61274e3677837220af3c71cdd5143a58b39f (65.113.61.98) 0.66ms
+[I 07:33:36.956 NotebookApp] Saving file at /uploads/questions.txt
+[W 07:40:47.497 NotebookApp] delete /global_result_txt
+[I 07:41:12.445 NotebookApp] Saving file at /server.py
+[I 07:41:51.562 NotebookApp] Saving file at /server.py
+[I 07:58:48.603 NotebookApp] Uploading file to /notes/Trees.txt
+[I 07:58:49.308 NotebookApp] Uploading file to /notes/Stacks and Queues.txt
+[I 07:58:50.122 NotebookApp] Uploading file to /notes/sorting.txt
+[I 07:58:50.934 NotebookApp] Uploading file to /notes/LinkedList.txt
+[I 07:58:51.767 NotebookApp] Uploading file to /notes/heaps.txt
+[I 07:58:52.552 NotebookApp] Uploading file to /notes/Hashmap.txt
+[I 07:58:53.388 NotebookApp] Uploading file to /notes/Graphs.txt
+[I 07:58:54.179 NotebookApp] Uploading file to /notes/Divide and Conquer.txt
+[I 07:58:55.096 NotebookApp] Uploading file to /notes/Arrays.txt
+[I 08:04:53.895 NotebookApp] Saving file at /server.py
+[I 08:04:54.552 NotebookApp] Saving file at /server.py
+[I 08:10:56.624 NotebookApp] Saving file at /server.py
+[I 08:11:37.019 NotebookApp] Saving file at /server.py
+[I 08:15:27.848 NotebookApp] Saving file at /server.py
+[I 08:26:07.653 NotebookApp] Starting buffering for 1a7de7f9-6536-4d26-9c91-dec6d1667930:FDF65815E64E4DB48981C976D2FB46FF
+[I 08:26:16.997 NotebookApp] Adapting to protocol v5.1 for kernel 0a0658e5-3229-41d4-9e18-f29ea9a0ed69
+[I 08:28:16.730 NotebookApp] Saving file at /Untitled.ipynb
+[I 08:29:27.180 NotebookApp] Saving file at /Untitled.ipynb
+[I 08:29:27.252 NotebookApp] Starting buffering for 0a0658e5-3229-41d4-9e18-f29ea9a0ed69:6A337C3490C84AB281AE720314D4309C
+[I 08:29:35.801 NotebookApp] Kernel shutdown: 0a0658e5-3229-41d4-9e18-f29ea9a0ed69
+[W 08:29:35.802 NotebookApp] delete /Untitled.ipynb
+[I 08:29:40.017 NotebookApp] Kernel shutdown: 222cce67-8eb4-4230-840e-d2642285276c
+[I 08:29:40.621 NotebookApp] Kernel shutdown: 1a7de7f9-6536-4d26-9c91-dec6d1667930
+[W 08:30:47.464 NotebookApp] delete /notes/questions.txt
