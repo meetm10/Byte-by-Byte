@@ -1,0 +1,298 @@
+Let’s quickly go over what a HashMap is.
+
+Simply speaking it is a Collection object which uses Key and Value pairs, where both parameters are objects declared on creation. Each Key maps to a corresponding Value. E.g. the key “foo” maps the value “bar”.
+
+It is declared as HashMap<Key, Value>.
+
+Consider you’re making a HashMap of players on a football team, and each of them is identified by a unique number. We would create this map by using an Integer as the Key, and a String of the player’s name as the Value.
+
+HashMap<String, Integer> playerMap = new HashMap<String, Integer>();
+
+// Put players into our HashMap where they can be found with an int
+playerMap.put(23, "David Beckham");
+playerMap.put(7, "Cristiano Ronaldo");
+playerMap.put(10, "Lionel Mess");
+playerMap.put(31, "Neymar");
+
+// Return a specific player
+System.out.print(playerMap.get(23)); // "David Beckham"
+
+As a note, a HashMap does not make any guarantees of order or sorting. When you add a Key to your HashMap, there is no reason it will be returned to you at the same location or even at a constant speed. As well, HashMaps are not thread safe so if you’re working in a multi-threaded environment consider using a different data object. But we’ll get to that later.
+Another example: Linking Keys (Subway Stations) to Values (Travel Time)
+
+Previously in versions of Java < 8, finding values of large HashMaps with the .get() method would have a worse case complexity of O(n). However, since Java 8 it is now O(log N). So there has been a substantial performance improvement, which make this data structure quite attractive to use.
+
+Creating Different Types of HashMap
+
+// You'll need to import a HashMap for this to work in your
+// Java project
+import java.util.HashMap; 
+
+// Let's create a bunch of HashMaps
+
+// Creating vanilla HashMap
+HashMap<String, Integer> map = new HashMap<String, Integer>();
+         
+// Creating HashMap with a capacity ... in this case 100
+Integer capacity = 100;   
+HashMap<String, Integer> map_2 = new HashMap<String, Integer>(capacity);
+         
+// Creating HashMap with capacity and load factor
+Integer capacity = 100;
+Double loadFactor = .5       
+HashMap<String, Integer> map3 = new HashMap<String, Integer (capacity, loadFactor); 
+
+What is a capacity and load factor for a HashMap?
+
+When a HashMap is instantiated there are two parameters that will affect its performance: initial capacity and load factor. Capacity is the number of buckets/bins in the hash table. While the load factor measures how many values the hash table is allowed to get before capacity is automatically increased. When the amount of items in the table is greater and the load factor and the capacity, the table is rehashed. Meaning the structure of the data is rebuilt with twice the number of buckets specified in the instantiation.
+
+Think of it as, “At what capacity percentage of items in my HashMap will cause it to automatically expand?”
+
+And, if you ever want to know which hash bucket you value lives in, you can use the key.hashCode() method to find out.
+
+Printing All Values In The Map — EntrySet Vs. KeySet
+
+There are two primary methods to loop through a HashMap, entrySet and keySet.
+
+When using an keySet you’re returning a set of the key objects in your HashMap. Remember from our example above we were able to return the player we wanted by using .get(playerNumber). Now have a list of all the player’s number so getting all the players will be easy.
+
+// Print all the players using a keySet
+
+for (Integer key : playerMap.keySet()) {
+    System.out.println(key + ":" + map.get(key));
+}
+
+// Results
+23:David Beckham
+7:Cristiano Ronaldo
+...
+
+By calling entrySet() on your map you create an Entry object that stores information in a structure that can easily be looped over. Looping over an entrySet is faster, as you’re not going to be asking the HashMap for the key twice. Notice how above we returned the key and then used it again in map.get(key)? With our entrySet we only need to call getKey() and getValue() as we loop through our Entry object.
+
+Also, entrySet implementations usually implement the toString() method, so this saves you some time when printing to the console.
+
+// Print all the players using a entrySet
+
+for (Entry <Integer, String> entry : playerMap.entrySet()) {
+    System.out.println(entry.getKey() + ":" + entry.getValue());
+}
+
+// Results
+23:David Beckham
+7:Cristiano Ronaldo
+...
+
+So which one to use? Generally speaking using an entrySet is better practice as it has less overhead.
+
+Adding Pairs to HashMap If Not Present?
+
+This is fairly straightforward, as the putIfAbsent() method does most of the work for you. If the key is not yet used, the key will be successfully inserted and the method will return null. However, if the key is already in the HashMap the value will instead be returned.
+
+// Add a football player to the playerMap if he is not in there
+// already ... remember David Beckham is 23
+
+// Try adding to an existing key
+String result = playerMap.putIfAbsent(23, "Thomas Müller");
+System.out.print(result) // David Beckham
+
+// Try adding to a new key
+String result = playerMap.putIfAbsent(5, "Thomas Müller");
+System.out.print(result) // Null
+
+How Do You Remove a Value? What About Changing the Value?
+
+To remove values from the HashMap use the .remove() method, which works with just keys, or keys and values if you want an element removed only if it is equal to a specific value.
+
+This is helpful when you want keys in your map only when certain conditions about those keys are in play.
+
+// Remove a player from the HashMap
+playerMap.remove(23);
+playerMap.get(23); // Null
+
+// Remove a player only if the key maps to a specific name
+// Remember 10 is mapped to Messi
+playerMap.remove(10, "Thomas Müller");
+playerMap.get(10) // "Lionel Messi"
+
+Now that we know how to remove keys, what about changing their value? The .replace() method will help us out here. And, similar to the .remove() above, you’re able to replace value only if it is currently mapped to a specific you want to be replaced.
+
+The syntax for both method signatures is quite similar, .replace(key, value) and .replace(key, oldValue, newValue).
+
+// Replace a player 
+playerMap.replace(23, "Wayne Rooney"); 
+playerMap.get(23) // "Wayne Rooney"
+
+// Replace a player only if it is currently mapped to a specific 
+// value ... won't replace because does not match
+playerMap.replace(23, "Thomas Müller", "Wayne Rooney");
+playerMap.get(23) // "David Beckham"
+
+How Do You Check Whether a Specific Key-Value Pair Exist?
+
+Using containsKey() and containsValue() methods.
+
+// Check if a key exists
+Boolean hasKey = playerMap.containsKey(23)
+hasKey // True
+
+// Check if a value exists
+Boolean hasValue = playerMap.containsKey("Foo Bar")
+hasValue // False
+
+How Do You Remove a Mapping While Looping?
+
+Now that we can loop through our HashMap and can add, destroy, or modify sections of it, let’s look at combining all of those into a question. Let’s say you wanted to remove a key of your HashMap during a loop, how would you do that?
+
+// Start with getting the entrySet and remove/edit the 
+// values you want
+
+for (Entry<Integer, String> entry : playerMap.entrySet()) {
+
+   // You can set this to anything ... this is just an example
+   if entry.getKey().equals("23") {
+      playerMap.remove(entry.getKey())
+   }
+}
+
+Bonus: Some Specialized HashMaps
+
+Keep in mind there are different flavours to HashMaps, and I’ll outline them below with their use cases.
+
+1. ConcurrentHashMap: HashMap to be used in multithreaded applications. This solves the multithreading issue brought up previously, however, ConcurrentHashMap performance is low sometimes because sometimes threads are required to wait.
+
+2. EnumMap: HashMap with Enum values as keys. Shown in the example below.
+
+// Instantiation of EnumMap
+EnumMap<Key extends Enum<Key>,Value>
+
+public enum STATE {
+     1, 2, 3, 4;
+}
+// Create the Map
+EnumMap<STATE, String> enumMap = new EnumMap<STATE, String (STATE.class);
+ 
+// Add values to the enumMap
+enumMap.put(STATE.1, "DEFCON - 1");
+enumMap.put(STATE.2, "DEFCON - 2");
+enumMap.put(STATE.3, "DEFCON - 3");
+enumMap.put(STATE.4, "DEFCON - 4");
+
+3. LinkedHashMap: This HashMap has a predictable iteration order as it maintains a linked list of the entries in the map, which is great if you’re using the map for a FIFO/LIFO purposes. While looping through, the elements will be returned in the order in which they were inserted.
+
+Final Thoughts
+
+This was just a short article on HashMaps and how you might approach different problems associated with them. HashMaps are important data structures which have many more applications I laid out here. Especially since the performance has greatly improved in Java 8.
+A hashmap is a storage place where we want to keep all of the data. So building upon this, we might want to add data, retrieve data or manipulate data, right? We’ll go through all of this by understanding the structure of the HashMap Java Class.
+`public class java.util.HashMap<K, V> {}`
+What does this mean? It says, that a HashMap (A storage place) will store the data in the form of a key-value pair where K is key and V is value. Why key-value, you’d ask? So this is because it makes the retrieval of data easier.
+What a hashmap does is, it takes the data and store the data in a bucket and then label that bucket with the hash of the key. So when we want that data back, we just call a method and pass in that key. And the hashmap will again hash the key, looks up if it has a bucket labeled with the hash of the key.
+I told you that the HashMap stores the data in key value pair and that it uses the power of both array and a linkedlist. That’s because it has an array and linked list implemented in it (Duh!).
+The array is used to store the hash of the key and the linked list is used to store the data and the key and other stuff. 
+One thing to note here is that, the HashMap stores the object in the form of Entry Class. And that Entry class is in the form of a linked list. 
+An Entry class looks like this.
+static class Entry<K,V> implements Map.Entry<K,V>
+{
+  final K key;
+  V value;
+  Entry<K,V> next;
+  final int hash;
+  ........
+}
+So, let’s suppose that each key can correspond to multiple values (Collision — explanation given later), these multiple values will be then stored in the Entry Object one by one and each entry object will be a LinkedList Node.
+Collisions in HashMap.
+A collision is a case when we try to add different values with the same key. To avoid returning back the value and saying that the HashMap can’t add this new value because it already contains this key, what it does is, it creates a linked list. And keeps on adding the values with the same key by creating new node in the linked list present at the array position calculated with the hash of that key. Get the idea with this picture.
+ 
+This is what I made!
+The array is used to store the hash of the key and the linked list is used to store the data and the key and other stuff.
+There are mainly 3 operations to perform:
+1.	Adding Data
+2.	Retrieving Data
+3.	Manipulating Data
+Let’s go into detail of each one.
+1. Adding Data
+To add data in a HashMap, we use the put() method.
+`public V put(K key, V value) {…}`
+What it’s saying is, to add data in form of key value pair where K can be anything like int, String, char or even an Object. And same goes for a value. And this method returns the old value present for that key. If there’s no value present for that key, this method will return null.
+Let’s go into the method put.
+public V put(K key, V value) 
+{
+  if (key == null)
+  return putForNullKey(value);
+  int hash = hash(key.hashCode());
+  int i = indexFor(hash, table.length);
+  for (Entry<K,V> e = table[i]; e != null; e = e.next)
+  {
+    Object k;
+    if (e.hash == hash && ((k = e.key) == key || key.equals(k)))
+    {
+      V oldValue = e.value;
+        e.value = value;
+        e.recordAccess(this);
+        return oldValue;
+    }
+   }
+   return null;
+}
+Step 1: What it’s saying is, first check if it’s null or not. If it’s null, don’t take the hash of the key as it will produce an error and instead take the data and insert a linked list node at 0th index of the array and put the data and key as an Entry Object. Only one object can be stored at the 0th index.
+If the key is not null, then take the hash of the key through the hash method overriden from the Object Class by the developer and then again take a hash through hash method implemented by the HashMap .
+Step 2: Now this hash will be a long digit integer. The array size cannot be this huge. The default array size is 16. And it grows exponentially in the power of 2. So what we do is, we take the hash and the array size and through some algorithm, produce an index within the range of the size of the array.
+Step 3: Then from the array it takes out each object (an Entry Object) one by one, and checks if the key matches and the hash matches. If it does, it adds the Entry object into linked list and return the old value.
+If there is already a value present in the linked list for that key, it adds the new Entry object at the end of that node and it forms a chain like this.
+ 
+This picture again. I made it. So yeah!
+How to prevent the dupicate Key entry? This is done by the equals() method. An equal method as used in the if condition in the above example. If the key is present it just adds the Entry object in the next node at that array location.
+2. Retrieving Data
+For retrieval, HashMap uses a get() Method. 
+ `public V get(K)`
+I am getting these method prototype from the javap command I used earlier.
+This method is saying that it gives you the Value (Entry Object), if you add the key in the get method. Let’s dive deeper into the method structure. It’s almost same as the put() method.
+public V get(Object key)
+{
+  if (key == null)
+  return getForNullKey();
+  int hash = hash(key.hashCode());
+  for (Entry<K,V> e = table[indexFor(hash, table.length)];e != null;e = e.next) 
+   {
+     Object k;
+     if (e.hash == hash && ((k = e.key) == key || key.equals(k)))
+     return e.value;
+   }
+  return null;
+}
+Step 1: Check if the key is null or not. If the key is null, then return the value kept at the 0th index of the array.
+Step 2: If the key is not null, take the key and use the developer overridden hashCode() method if it’s there. Then take the hash of the output again.
+Step 3: In the for loop, what you see is, you take out the whole linked list on that array location by passing the index (calculated from the indexFor() method)
+Step 4: Now we know that Each entry object looks like this.
+static class Entry<K,V> implements Map.Entry<K,V>
+{
+ final K key;
+ V value;
+ Entry<K,V> next;
+ final int hash;
+ ........
+}
+So it means each node of the linked list looks like this. Each node stores the value, the hash, the key and the address of the next Entry Object or the node in the chain.
+So when in the for loop, we get the first entry object of the linked List at that array location. Then we match it’s Key and Value and the hash. If it matches we return the value or else we pick up the next node in the linked list. and do the same process again.
+Step 4: If we find the value, we return it or else we return null.
+3. Manipulating Data
+`public V remove(K);
+public void clear();
+public boolean remove(K,V);
+public boolean replace(K, V, V);
+public V replace(K, V);`
+All of these methods are used for manipulating data. I guess you understand how this works now. Still if you don’t, ask in the comment section.
+Performance of the HashMap
+The performance of the hashmap is affected by the Initial Capacity and the Load Factor.
+Initial capacity is the array size. It’s default value is 16. And it grows in the power of 2.
+Load Factor is the value that determines at which point the array needs to be resized. The default value is 0.75. This means if the array has been filled upto INITIAL_CAPACITY*LoadFactor, the array is resized and then it becomes of 32 in length (16*2). And that keeps on repeating.
+If you want to set them explicitly, yourself, you can do it like this.
+Map<String,String> hashMapWithCapacity=new HashMap<>(32);
+Map<String,String> hashMapWithCapacityAndLF=new HashMap<>(32, 0.5f);
+A high INITIAL_CAPACITY is good for large number of Entries but little iterations.
+And a low INITIAL_CAPACITY is good for small number of entries but huge iterations.
+New In Java 8
+As of java 8, when the Entries in a linked list reaches 8 (MIN_TREEIFY_CAPACITY;), it converts the linked list to a Balanced Tree . This improved the performance a million times.
+Earlier, the get method had the complexity of O(n) in worst case scenarios. But that changed in Java 8. It became O(logn). This was because of the Balanced Tree which made the traversal faster.
+Now even with a million entries, it takes only 10 nanosecond!
+So this is the power of the HashMaps
+

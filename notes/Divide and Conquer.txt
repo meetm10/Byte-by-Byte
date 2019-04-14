@@ -1,0 +1,60 @@
+﻿The divide-and-conquer strategy solves a problem by:
+1. Breaking it into subproblems that are themselves smaller instances of the same type of
+problem
+2. Recursively solving these subproblems
+3. Appropriately combining their answers
+The real work is done piecemeal, in three different places: in the partitioning of problems
+into subproblems; at the very tail end of the recursion, when the subproblems are so small
+that they are solved outright; and in the gluing together of partial answers. These are held
+together and coordinated by the algorithm’s core recursive structure.
+As an introductory example, we’ll see how this technique yields a new algorithm for multiplying numbers, one that is much more efficient than the method we all learned in elementary
+school!
+Divide-and-conquer algorithms often follow a generic pattern: they tackle a problem of size
+n by recursively solving, say, a subproblems of size n=b and then combining these answers in
+O(nd) time, for some a; b; d > 0 (in the multiplication algorithm, a = 3, b = 2, and d = 1). Their
+running time can therefore be captured by the equation T(n) = aT(dn=be) + O(nd). We next
+derive a closed-form solution to this general recurrence so that we no longer have to solve it
+explicitly in each new instance
+This single theorem tells us the running times of most of the divide-and-conquer procedures
+we are likely to use.
+Proof. To prove the claim, let’s start by assuming for the sake of convenience that n is a
+power of b. This will not influence the final bound in any important way—after all, n is at
+most a multiplicative factor of b away from some power of b (Exercise 2.2)—and it will allow
+us to ignore the rounding effect in dn=be.
+Next, notice that the size of the subproblems decreases by a factor of b with each level
+of recursion, and therefore reaches the base case after logb n levels. This is the height of
+the recursion tree. Its branching factor is a, so the kth level of the tree is made up of subproblems, each of size n=bk (Figure 2.3). The total work done at this level is
+ak × O  bnk  d = O(nd) ×  bad k :
+As k goes from 0 (the root) to logb n (the leaves), these numbers form a geometric series with
+ratio a=bd. Finding the sum of such a series in big-O notation is easy (Exercise 0.2), and comes
+down to three cases.
+1. The ratio is less than 1.
+Then the series is decreasing, and its sum is just given by its first term, O(nd).
+2. The ratio is greater than 1.
+The series is increasing and its sum is given by its last term, O(nlogb a):
+nd  bad logb n = nd  (balog logbbnn)d   = alogb n = a(loga n)(logb a) = nlogb a:
+3. The ratio is exactly 1.
+In this case all O(log n) terms of the series are equal to O(nd).
+These cases translate directly into the three contingencies in the theorem statement.
+
+Merge Sort
+We now turn our attention to using a divide and conquer strategy as a way to improve the performance of sorting algorithms. The first algorithm we will study is the merge sort. Merge sort is a recursive algorithm that continually splits a list in half. If the list is empty or has one item, it is sorted by definition (the base case). If the list has more than one item, we split the list and recursively invoke a merge sort on both halves. Once the two halves are sorted, the fundamental operation, called a merge, is performed. Merging is the process of taking two smaller sorted lists and combining them together into a single, sorted, new list. Figure 10 shows our familiar example list as it is being split by mergeSort. Figure 11 shows the simple lists, now sorted, as they are merged back together.
+The mergeSort function shown in ActiveCode 1 begins by asking the base case question. If the length of the list is less than or equal to one, then we already have a sorted list and no more processing is necessary. If, on the other hand, the length is greater than one, then we use the Python slice operation to extract the left and right halves. It is important to note that the list may not have an even number of items. That does not matter, as the lengths will differ by at most one.
+Once the mergeSort function is invoked on the left half and the right half (lines 8–9), it is assumed they are sorted. The rest of the function (lines 11–31) is responsible for merging the two smaller sorted lists into a larger sorted list. Notice that the merge operation places the items back into the original list (alist) one at a time by repeatedly taking the smallest item from the sorted lists.
+The mergeSort function has been augmented with a print statement (line 2) to show the contents of the list being sorted at the start of each invocation. There is also a print statement (line 32) to show the merging process. The transcript shows the result of executing the function on our example list. Note that the list with 44, 55, and 20 will not divide evenly. The first split gives [44] and the second gives [55,20]. It is easy to see how the splitting process eventually yields a list that can be immediately merged with other sorted lists.
+In order to analyze the mergeSort function, we need to consider the two distinct processes that make up its implementation. First, the list is split into halves. We already computed (in a binary search) that we can divide a list in half logn times where n is the length of the list. The second process is the merge. Each item in the list will eventually be processed and placed on the sorted list. So the merge operation which results in a list of size n requires n operations. The result of this analysis is that logn splits, each of which costs n for a total of nlogn operations. A merge sort is an O(nlogn) algorithm.
+Recall that the slicing operator is O(k)
+where k is the size of the slice. In order to guarantee that mergeSort will be O(nlogn) we will need to remove the slice operator. Again, this is possible if we simply pass the starting and ending indices along with the list when we make the recursive call. We leave this as an exercise. It is important to notice that the mergeSort function requires extra space to hold the two halves as they are extracted with the slicing operations. This additional space can be a critical factor if the list is large and can make this sort problematic when working on large data sets.
+
+Quicksort
+The quick sort uses divide and conquer to gain the same advantages as the merge sort, while not using additional storage. As a trade-off, however, it is possible that the list may not be divided in half. When this happens, we will see that performance is diminished.
+A quick sort first selects a value, which is called the pivot value. Although there are many different ways to choose the pivot value, we will simply use the first item in the list. The role of the pivot value is to assist with splitting the list. The actual position where the pivot value belongs in the final sorted list, commonly called the split point, will be used to divide the list for subsequent calls to the quick sort.
+Figure 12 shows that 54 will serve as our first pivot value. Since we have looked at this example a few times already, we know that 54 will eventually end up in the position currently holding 31. The partition process will happen next. It will find the split point and at the same time move other items to the appropriate side of the list, either less than or greater than the pivot value.
+Partitioning begins by locating two position markers—let’s call them leftmark and rightmark—at the beginning and end of the remaining items in the list (positions 1 and 8 in Figure 13). The goal of the partition process is to move items that are on the wrong side with respect to the pivot value while also converging on the split point. Figure 13 shows this process as we locate the position of 54.
+We begin by incrementing leftmark until we locate a value that is greater than the pivot value. We then decrement rightmark until we find a value that is less than the pivot value. At this point we have discovered two items that are out of place with respect to the eventual split point. For our example, this occurs at 93 and 20. Now we can exchange these two items and then repeat the process again.
+
+At the point where rightmark becomes less than leftmark, we stop. The position of rightmark is now the split point. The pivot value can be exchanged with the contents of the split point and the pivot value is now in place (Figure 14). In addition, all the items to the left of the split point are less than the pivot value, and all the items to the right of the split point are greater than the pivot value. The list can now be divided at the split point and the quick sort can be invoked recursively on the two halves.
+The quickSort function shown in ActiveCode 1 invokes a recursive function, quickSortHelper. quickSortHelper begins with the same base case as the merge sort. If the length of the list is less than or equal to one, it is already sorted. If it is greater, then it can be partitioned and recursively sorted. The partition function implements the process described earlier.
+To analyze the quickSort function, note that for a list of length n, if the partition always occurs in the middle of the list, there will again be logn divisions. In order to find the split point, each of the n items needs to be checked against the pivot value. The result is nlogn. In addition, there is no need for additional memory as in the merge sort process.
+Unfortunately, in the worst case, the split points may not be in the middle and can be very skewed to the left or the right, leaving a very uneven division. In this case, sorting a list of n items divides into sorting a list of 0 items and a list of n−1 items. Then sorting a list of n−1 divides into a list of size 0 and a list of size n−2, and so on. The result is an O(n2).
+sort with all of the overhead that recursion requires.We mentioned earlier that there are different ways to choose the pivot value. In particular, we can attempt to alleviate some of the potential for an uneven division by using a technique called median of three. To choose the pivot value, we will consider the first, the middle, and the last element in the list. In our example, those are 54, 77, and 20. Now pick the median value, in our case 54, and use it for the pivot value (of course, that was the pivot value we used originally). The idea is that in the case where the the first item in the list does not belong toward the middle of the list, the median of three will choose a better “middle” value. This will be particularly useful when the original list is somewhat sorted to begin with. We leave the implementation of this pivot value selection as an exercise.

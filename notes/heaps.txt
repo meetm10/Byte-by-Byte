@@ -1,0 +1,118 @@
+Heaps are a great example of many core computer science concepts working together in order to form one very large abstraction, which is made up of smaller parts that we’re already familiar with!
+
+So, let’s build up our concept of a heap bit by bit: like building blocks! We’ll start by answering something fairly simple to start: what is a heap?
+Heaps: a defintion
+
+A heap is really nothing more than a binary tree with some additional rules that it has to follow. These two rules are the two properties that define what differentiates a heap structure from any other tree structure.
+
+Earlier in this series, we learned about trees, which always have a root node, and can have many child nodes. We also discovered the curious binary tree, which is a subset of a tree structure, with it’s own set of rules to follow. We can recall that a binary tree’s nodes can only ever have two children: a left child, and right child.
+
+A heap is basically just one of these binary trees; it just has even more rules that it must follow! Heaps were invented fairly recently in 1964 by John Williams, and when most people talk about heaps, they’re referring to binary heaps, which are shaped exactly like binary trees. Heaps are effectively binary trees with more specifications and properties.
+
+So, what are the two properties of a heap? Well, it all boils down to the shape of the tree, and the order of the tree’s nodes. If we can remember these two aspects, it will be easy for us to identify a heap from any other binary tree.
+The two rules of heaping: shape + order.
+
+Let’s talk about shape first. In order for a binary tree to qualify as a heap, it must be complete tree; in other words, every single level of the tree must be completely filled — with the last level being the only exception. Additionally, the last level of the tree must always have the left-most nodes filled first.
+
+Another way of thinking about this is that one entire level of nodes must all have children added to them before they can have grandchildren nodes.
+
+In the example shown here, the tree on the left has two children nodes at the root; however, the left child node has a grandchild, while the right child node doesn’t even have children! This makes the tree non-complete, which means that it cannot be considered to be a heap.
+
+In comparison, the tree on the right has a root node with two children. We can see that both of the children nodes don’t have children of their own — only the left child has a single child node of its own. However, this is still a heap because the nodes of the last level are filled up starting from the left side. But, if instead of the left child, the right child had a node, this would no longer be a heap, since it would be violating the shape-order property of heap data structures.
+
+What about the order of a heap — what are the rules for that?
+
+The basic rule for the order property of a heap is this: a parent nodes (including the root node) of a heap must either be greater than or equal to the value of its children nodes, or less than or equal to the value of its children nodes. Either of these two formats is acceptable for a heap and, based on the ordering of the parent-child nodes, we can classify heaps based on their ordering.
+Min heaps vs. max heaps
+
+A min heap is a heap where every single parent node, including the root, is less than or equal to the value of its children nodes. In the example shown here, the pink heap is a min heap, since the parent nodes, 5 and 12, are less than or equal to the value of their children nodes. The most important property of a min heap is that the node with the smallest, or minimum value, will always be the root node.
+
+A max heap is effectively the converse of a min heap; in this format, every parent node, including the root, is greater than or equal to the value of its children nodes. In the red heap illustrated here, the parent nodes are 58, 40, and 50, and they are all greater than or equal in size to their child nodes. The important characteristic of a max heap is that the node with the largest, or maximum value will always be at the root node.
+
+There are two important things to note here, which we might have already picked up on based on the examples we just looked at. First, we can always have duplicate values in a heap — there’s no restriction against that. Second, a heap doesn’t follow the rules of a binary search tree; unlike binary search trees, the left node does not have to be smaller than the right node! In fact, in both of the trees shown above, the left node is often larger than the right! The ordering of the child nodes isn’t important for a heap; the only ordering that matters is the heap-order property, or the ordering of parent nodes compared to their children.
+Growing and shrinking a heap
+
+Now that we know what a heap is, exactly, we can finally start exploring how to go about using them. Let’s start by figuring out how to add things to our heap, since the whole point of a data structure is being able to add stuff to it!
+
+The crucial thing to always keep in mind when growing or shrinking a heap is how we are manipulating or changing its structure in the process.
+
+    We must always maintain the shape and structure of a heap — otherwise, we’re violating one of its two properties!
+
+When growing a heap, we can only ever add a node to the left-most available spot in the tree; that is to say, the left most available node, at the lowest possible level.
+Growing a heap: adding an element.
+
+In the illustration shown here, we have a max heap with 73 as the root node, and five nodes in total. We want to add an element to this heap: 43. In order to do so, we have to find the lowest level, and add this element to the left-most available spot.
+
+We can add it as the left child of the node 35. Great! Well, almost. Our heap follows the shape property, but now we’re violating the order property, since the parent node, 35, is less than its child node, 43.
+
+How can we solve this so that we’re following both the rules of shape and order?
+
+Well, the solution is fairly simple: we can just swap the two nodes that are out of order! If we swap the child node 43 for the parent node, 35, we no longer violate our max heap’s ordering rule! And now, our heap is both structured correctly, as well as ordered correctly. Not too terrible, right?
+
+Okay, so what about removing an element from our heap? Remember: we can’t break our rules of shape and order while doing this, so we need to be a little clever here. Since we did some swapping magic while growing our heap, you might already have an idea in your head about how to go about doing this while shrinking our heap!
+
+In the example show below, we’re still dealing with the same max heap as before; it’s grown a bit, and now we have 9 nodes in total, including the root node. When deleting or removing an element, most heaps are usually concerned with removing the root node, since the root will always be either the largest value element or the smallest value element, depending upon whether the heap is a max heap or min heap.
+Shrinking a heap: removing an element
+
+So, let’s say that we’re removing the root node, 71, which is our largest value element.
+
+Cool — we can remove it without any problems. Except…now our tree doesn’t have a root node, which means that we’re totally messing up our heaps’ structure! We’ll need to move some things around so that our heap actually looks like the binary tree it’s supposed to look like.
+
+Okay, we know that we can’t start removing nodes at random, since we need to keep all of our levels filled up. However, we can remove the right-most node at the lowest level. In this case, that node has the value 2; we can remove this node, and stick it in our root node’s position, so that our tree still looks like a heap. Great! Now our heap is shaped correctly, but the order is totally wrong: 2 is definitely less than its child nodes, 19 and 43. We know that it’s violating our heap-order property in this location.
+
+So, let’s try using our clever swapping trick again! We can compare the two child nodes of our out-of-order root node. In this case, those two nodes are 19 and 43. Since they are both bigger than 2, we can take the larger of the two child nodes, and swap it with the out-of-order root node. Since 43 is larger than 19, it’s the larger of the two children; we can swap it with 2, and now 43 becomes our root node, and 2 becomes its child node!
+
+Now, while 2 isn’t the root node any more, it’s still a parent node of two elements that are larger than it: 35 and 20. So, we’re not quite done with this node just yet!
+Shrinking a heap, continued: removing an element
+
+The good news is that we can basically continue doing this compare-and-swap trick until the element we replaced our root node with, the node 2, is located in an acceptable place.
+
+    Just as we percolated a node up to its correct location in the heap when we added an element, we will bubble down a node to an appropriate spot when we delete an element from the heap.
+
+Eventually, we “bubble down” a node until we are no longer violating the heap-order property — that is to say, until all the parent nodes are greater than or equal to their child nodes (for a max heap) or less than or equal to their child nodes (for a min heap). This method of swapping allows us to easily maintain the structure of our heap so that all we need to worry about is the ordering of the nodes themselves.
+Queuing up heaps on heaps
+
+By now we’re (hopefully) pretty comfortable with how heaps work, and the two rules that they must always follow. But there’s something still left to discuss: how do we go about implementing heaps, and why should we use them? As it turns out, the answers to both of these questions are rather intertwined.
+
+    When it comes to heaps, form truly does follow function.
+
+Let’s answer the how first, and then we’ll get to the why.
+
+While it’s totally possible to implement a heap as a linked list, the way that we implemented trees earlier in this series, there’s a far more interesting way of representing a heap: an array.
+
+We might have already noticed that heaps are partially sorted data structures; there is an element of “ordering” to them, but they’re also not completely sorted in the way that a binary search tree would be. However, the most import aspect of a heap is that the maximum or minimum value element is always the root node.
+Representing a heap as an array structure
+
+Because we can always depend on this fact to be true, we can always represent the root node of a heap as the first element of an array. In other words, the root node is always located at index 0 of an array.
+
+What’s super interesting is that, if we know the index of the root node, we can manipulate that index in order to determine where its child nodes would be located within that same array representation of the heap.
+
+There are some helpful algorithms/formulas to help us figure out the location of a child element. For example, if a parent node’s index is represented by index i in an array, then it’s left child will always be located at 2i + 1. Similarly, if a parent node’s index is represented by index i in an array, then it’s right child will always be located at 2i + 2.
+
+Let’s look at an example of a heap translated to an array, and these algorithms will start to become a lot more clear and obvious to see.
+Transforming heaps into arrays [EDIT: please notice that the number 4 is missing! I should have drawn it in (oops). It should be the right child of 19!]
+
+In the illustration shown here, we have a heap with eight nodes in it, including the root. We can use the parent-child relationships and array indexes to transform this array into a heap, and vice versa.
+
+For starters, we know that our root node, 43, is at an index of 0. If we know that i = 0, then we can use our left child and right child formulas to determine the index of the first two children, 19 and 35. If we substitute the index of our root node, 0, for i, then we can pretty quickly figure out that the node 19 should live at the index of 1, since (2×0)+1 is equal to 1.
+
+I’ve illustrated how this works for each of the child nodes and grandchildren nodes. Notice that, with each level we move down in the heap, the index of of the parent node, i, changes accordingly.
+
+We can also determine the index of a node’s parent by subtracting 1 from the current node’s index, n, dividing it by 2, and finding the floor of that number. If you’ve never seen the floor shorthand before, don’t worry — all it means is rounding down a decimal to its closest integer (i.e. 2.9 would round down to 2). For example, we can determine the index of the node 2’s parent by finding the floor of (5–1) divided by 2. This gives us the index of its parent, 2, which is the node 35.
+Determining a node’s index in an array
+
+These two formulas are effectively how heaps are built and created, as well as the logic for determining which nodes live at what index in their corresponding array structures! We can see how the parent-child relationships are maintained using these formulas, even while the heap is represented in an array format.
+
+Okay, so now that we know how to represent a heap, the question yet to be answered is, of course, why we need to represent them as arrays at all! Well, guess what? You already know the answer. It’s because of queues!
+
+We might remember that queues are data structures that follow the first-in, first-out (FIFO) principle, and are used in tons of places: managing requests, jobs, CPU scheduling, are just a few examples. Heaps are often implemented as arrays because they are super efficient ways of representing priority queues.
+Priority queues are queue data structures with additional properties.
+
+A priority queue is a queue data structure with some additional properties. Every item in a priority queue has a “priority” associated with (usually a numerical value). An item with a high priority is dequeued before an item with a lower priority. If two items have the same priority, they’re dequeued based on their order in the queue; in other words, they’re removed according to their location in the array.
+
+Binary heaps are super efficient for implementing priority queues because it’s very easy to know and retrieve/remove the element with the highest priority: it will always be the root node!
+Binary heaps are efficient ways of implementing priority queues!
+
+This one specific characteristic of heaps that we’ve been referencing repeatedly is exactly what makes heaps the data structure of choice when it comes to priority queues! Finding the maximum of minimum value element takes a constant amount of time, which makes it efficient to dequeue an item. Similarly, because of their binary tree structure, adding or removing an element takes logarithmic time, since we eliminate half of the possible nodes with each level that we traverse to add/delete an element.
+
+Heaps are the very abstractions that we are (inadvertently) interacting with when we uses libraries to help us handle job scheduling, background workers, and even what our machines use to handle internal tasks! That should be reason enough to love these magnificent data structures that have been around us the entire time — even if we didn’t know that they were there.

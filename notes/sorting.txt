@@ -1,0 +1,65 @@
+Sorting is a key to CS theory, but easy to forget. I had an itch to review the algorithms in Wikipedia (strange, I know), and here are my notes:
+High-level thoughts
+
+    Some algorithms (selection, bubble, heapsort) work by moving elements to their final position, one at a time. You sort an array of size N, put 1 item in place, and continue sorting an array of size N – 1 (heapsort is slightly different).
+    Some algorithms (insertion, quicksort, counting, radix) put items into a temporary position, close(r) to their final position. You rescan, moving items closer to the final position with each iteration.
+    One technique is to start with a “sorted list” of one element, and merge unsorted items into it, one at a time.
+    Complexity and running time
+        Factors: algorithmic complexity, startup costs, additional space requirements, use of recursion (function calls are expensive and eat stack space), worst-case behavior, assumptions about input data, caching, and behavior on already-sorted or nearly-sorted data
+        Worst-case behavior is important for real-time systems that need guaranteed performance. For security, you want the guarantee that data from an attacker does not have the ability to overwhelm your machine.
+        Caching — algorithms with sequential comparisons take advantage of spatial locality and prefetching, which is good for caching.
+        Algorithmic time vs. real time — The simple algorithms may be O(N^2), but have low overhead. They can be faster for sorting small data sets (< 10 items). One compromise is to use a different sorting method depending on the input size.
+        “Comparison sorts” make no assumptions on the data and compare all elements against each other (majority of sorts). O(N lg N) time is the ideal “worst-case” scenario (if that makes sense — O(N lg N) is the smallest penalty you can hope for in the worst case). Heapsort has this behavior.
+        O(N) time is possible if we make assumptions about the data and don’t need to compare elements against each other (i.e., we know the data falls into a certain range or has some distribution). O(N) clearly is the minimum sorting time possible, since we must examine every element at least once (how can you sort an item you do not even examine?).
+
+Notes
+
+    Assume we are sorting a list or array of N elements
+    Once sorted, smaller items are on the left (first item) and larger items are on the right (last item)
+Bubble Sort:
+
+The bubble sort makes multiple passes through a list. It compares adjacent items and exchanges those that are out of order. Each pass through the list places the next largest value in its proper place. In essence, each item “bubbles” up to the location where it belongs.
+
+Figure 1 shows the first pass of a bubble sort. The shaded items are being compared to see if they are out of order. If there are n items in the list, then there are n−1
+pairs of items that need to be compared on the first pass. It is important to note that once the largest value in the list is part of a pair, it will continually be moved along until the pass is complete.
+At the start of the second pass, the largest value is now in place. There are n−1 items left to sort, meaning that there will be n−2 pairs. Since each pass places the next largest value in place, the total number of passes necessary will be n−1. After completing the n−1
+
+passes, the smallest item must be in the correct position with no further processing required. ActiveCode 1 shows the complete bubbleSort function. It takes the list as a parameter, and modifies it by exchanging items as necessary.
+
+The exchange operation, sometimes called a “swap,” is slightly different in Python than in most other programming languages. Typically, swapping two elements in a list requires a temporary storage location (an additional memory location). A code fragment such as will exchange the ith and jth items in the list. Without the temporary storage, one of the values would be overwritten.
+
+In Python, it is possible to perform simultaneous assignment. The statement a,b=b,a will result in two assignment statements being done at the same time (see Figure 2). Using simultaneous assignment, the exchange operation can be done in one statement.
+
+Lines 5-7 in ActiveCode 1 perform the exchange of the i
+and (i+1)th items using the three–step procedure described earlier. Note that we could also have used the simultaneous assignment to swap the items.
+To analyze the bubble sort, we should note that regardless of how the items are arranged in the initial list, n−1 passes will be made to sort a list of size n. Table 1 shows the number of comparisons for each pass. The total number of comparisons is the sum of the first n−1 integers. Recall that the sum of the first n integers is 12n2+12n. The sum of the first n−1 integers is 12n2+12n−n, which is 12n2−12n. This is still O(n2) comparisons. In the best case, if the list is already ordered, no exchanges will be made. However, in the worst case, every comparison will cause an exchange. On average, we exchange half of the time.
+A bubble sort is often considered the most inefficient sorting method since it must exchange items before the final location is known. These “wasted” exchange operations are very costly. However, because the bubble sort makes passes through the entire unsorted portion of the list, it has the capability to do something most sorting algorithms cannot. In particular, if during a pass there are no exchanges, then we know that the list must be sorted. A bubble sort can be modified to stop early if it finds that the list has become sorted. This means that for lists that require just a few passes, a bubble sort may have an advantage in that it will recognize the sorted list and stop. ActiveCode 2 shows this modification, which is often referred to as the short bubble.
+
+Selection Sort
+The selection sort improves on the bubble sort by making only one exchange for every pass through the list. In order to do this, a selection sort looks for the largest value as it makes a pass and, after completing the pass, places it in the proper location. As with a bubble sort, after the first pass, the largest item is in the correct place. After the second pass, the next largest is in place. This process continues and requires n−1 passes to sort n items, since the final item must be in place after the (n−1)st pass.
+
+Figure 3 shows the entire sorting process. On each pass, the largest remaining item is selected and then placed in its proper location. The first pass places 93, the second pass places 77, the third places 55, and so on. The function is shown in ActiveCode 1.
+Selection sort algorithm starts by compairing first two elements of an array and swapping if necessary, i.e., if you want to sort the elements of array in ascending order and if the first element is greater than second then, you need to swap the elements but, if the first element is smaller than second, leave the elements as it is. Then, again first element and third element are compared and swapped if necessary. This process goes on until first and last element of an array is compared. This completes the first step of selection sort.
+
+If there are n elements to be sorted then, the process mentioned above should be repeated n-1 times to get required result. But, for better performance, in second step, comparison starts from second element because after first step, the required number is automatically placed at the first (i.e, In case of sorting in ascending order, smallest element will be at first and in case of sorting in descending order, largest element will be at first.). Similarly, in third step, comparison starts from third element and so on.
+
+Selection sort algorithm is easy to use but, there are other sorting algorithm which perform better than selection sort. Specially, selection sort shouldn't be used to sort large number of elements if the performance matters in that program.
+
+Insertion Sort
+Here's another way to think about sorting. Imagine that you are playing a card game. You're holding the cards in your hand, and these cards are sorted. The dealer hands you exactly one new card. You have to put it into the correct place so that the cards you're holding are still sorted. In selection sort, each element that you add to the sorted subarray is no smaller than the elements already in the sorted subarray. But in our card example, the new card could be smaller than some of the cards you're already holding, and so you go down the line, comparing the new card against each card in your hand, until you find the place to put it. You insert the new card in the right place, and once again, your hand holds fully sorted cards. Then the dealer gives you another card, and you repeat the same procedure. Then another card, and another card, and so on, until the dealer stops giving you cards.
+This is the idea behind insertion sort. Loop over positions in the array, starting with index 1. Each new position is like the new card handed to you by the dealer, and you need to insert it into the correct place in the sorted subarray to the left of that position.
+In terms of arrays, imagine that the subarray from index 0 through index 5 5 55 is already sorted, and we want to insert the element currently in index 6 into this sorted subarray, so that the subarray from index 0 through index 6 is sorted. Here's how we start:
+And here's what the subarray should look like when we're done:
+To insert the element in position 6 into the subarray to its left, we repeatedly compare it with elements to its left, going right to left. Let's call the element in position 6 the key. Each time we find that the key is less than an element to its left, we slide that element one position to the right, since we know that the key will have to go to that element's left. We'll need to do two things to make this idea work: we need to have a slide operation that slides an element one position to the right, and we need to save the value of the key in a separate place (so that it doesn't get overridden by the element to its immediate left). In our example, let's pull the element at index 6 into a variable called key:
+Now, we compare key with the element at position 5. We find that key (5) is less than the element at position 5 (13), and so we slide this element over to position 6: Notice that the slide operation just copies the element one position to the right. Next, we compare key with the element at position 4. We find that key (5) is less than the element at position 4 (10), and we slide this element over:
+Insertion sort repeatedly inserts an element in the sorted subarray to its left. Initially, we can say that the subarray containing only index 0 is sorted, since it contains only one element, and how can a single element not be sorted with respect to itself? It must be sorted. Let's work through an example. Here's our initial array:
+Because the subarray containing just index 0 is our initial sorted subarray, the first key is in index 1. (We'll show the sorted subarray in red, the key in yellow, and the part of the array that we have yet to deal with in blue.) We insert the key into the sorted subarray to its left:
+Now the sorted subarray runs from index 0 through index 1, and the new key is in index 2. We insert it into the sorted subarray to its left:
+We keep going, considering each array element in turn as the key, and inserting it into the sorted subarray to its left:
+Once we've inserted that rightmost element in the array, we have sorted the entire array:
+A couple of situations that came up in our example bear a little more scrutiny: when the key being inserted is less than all elements to its left (as when we inserted keys 2 and 3), and when it's greater than or equal to all elements to its left (as when we inserted key 13). In the former case, every element in the subarray to the left of the key slides one position to the right, and we have to stop once we've run off the left end of the array. In the latter case, the first time we compare the key with an element to its left, we find that the key is already in its correct position relative to all elements to its left; no elements slide over and the key drops back into the position in which it started.
+Inserting a value into a sorted subarray
+The main step in insertion sort is making space in an array to put the current value, which is stored in the variable key. As we saw above, we go through the subarray to the left of key's initial position, right to left, sliding each element that is greater than key one position to the right. Once we find an element that is less than key, or equal to key, we stop sliding and copy key into the vacated position just to the right of this element. (Of course, the position is not truly vacated, but its element was slid over to the right.) 
+
+
+
